@@ -1,0 +1,31 @@
+name: Execute Airflow Command
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        required: true
+        type: string
+        default: airflow db check
+
+jobs:
+  exec: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Setup local runner environment
+        uses: phaelin/mwaa-local-runner-action@main
+        with:
+          up: true
+
+      - name: Executing custom command within local MWAA
+        uses: phaelin/mwaa-local-runner-action@main
+        with:
+          exec: true
+          exec-command: ${{ inputs.command }}
+
+      - name: Tear down local runner environment
+        uses: phaelin/mwaa-local-runner-action@main
+        with:
+          down: true
