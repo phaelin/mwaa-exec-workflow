@@ -15,10 +15,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup local runner environment
+        id: setup
         uses: phaelin/mwaa-local-runner-action@main
         with:
           up: true
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get airflow endpoint
+        run: |
+          echo "Airflow Endpoint: ${{ steps.setup.outputs.airflow-endpoint }}"
 
       - name: Executing custom command within local MWAA
         uses: phaelin/mwaa-local-runner-action@main
