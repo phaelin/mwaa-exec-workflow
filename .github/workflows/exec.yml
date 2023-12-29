@@ -18,6 +18,7 @@ jobs:
         uses: phaelin/mwaa-local-runner-action@main
         with:
           up: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Executing custom command within local MWAA
         uses: phaelin/mwaa-local-runner-action@main
