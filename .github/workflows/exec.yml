@@ -23,7 +23,7 @@ jobs:
 
       - name: Get airflow endpoint
         run: |
-          echo "Airflow Endpoint: ${{ steps.setup.outputs.airflow-endpoint }}"
+          echo "Airflow Endpoint: ${{ steps.setup.outputs.airflow-endpoint }}" >> $GITHUB_SUMMARY
 
       - name: Executing custom command within local MWAA
         uses: phaelin/mwaa-local-runner-action@main
